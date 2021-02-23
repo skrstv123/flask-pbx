@@ -27,7 +27,7 @@ mydb = connector.connect(
 
 @app.route("/fetch", methods=["POST"])
 def fetch():
-    data = request.get_json(silent = True)
+    data = json.loads(request.data)
     sql = data['sql']
     mycursor = mydb.cursor()
     mycursor.execute(sql)
@@ -59,4 +59,3 @@ def internal_server_error(error):
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=4000, debug=True)
 
-    
