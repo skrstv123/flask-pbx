@@ -25,10 +25,9 @@ mydb = connector.connect(
         database = "asteriskcdrdb",
     )
 
-@app.route("/fetch", methods=["POST"])
+@app.route("/fetch", methods=["GET"])
 def fetch():
-    data = json.loads(request.data)
-    sql = data['sql']
+    sql = "select * from cdr"
     mycursor = mydb.cursor()
     mycursor.execute(sql)
     row = mycursor.fetchone()
