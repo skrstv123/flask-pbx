@@ -14,7 +14,7 @@ connector = mysql.connector
 mydb = connector.connect(
         connection_timeout = 5,
         port = "3306",
-        host = "pbx.dynopii.com",
+        host = "localhost",
         user = "root",
         database = "asteriskcdrdb",
     )
