@@ -1,13 +1,6 @@
 import os
 from flask import Flask, jsonify, request, abort, make_response, render_template, send_file
 from flask_cors import CORS, cross_origin
-import datetime
-import json
-from bson.json_util import dumps
-import io
-import csv
-import uuid
-from lxml import etree
 import traceback
 import mysql.connector  
 
