@@ -2,6 +2,7 @@ import os
 from flask import Flask, jsonify, request, abort, make_response, render_template, send_file
 from flask_cors import CORS, cross_origin
 import traceback
+import json
 import mysql.connector  
 
 app = Flask(__name__)
@@ -19,7 +20,7 @@ mydb = connector.connect(
     )
 
 def send(data, status_code):
-    return make_response(jsonify(json.loads(dumps(data))), status_code)
+    return make_response(jsonify(data), status_code)
 
 @app.route("/fetch", methods=["GET"])
 def fetch():
