@@ -18,6 +18,9 @@ mydb = connector.connect(
         database = "asteriskcdrdb",
     )
 
+def send(data, status_code):
+    return make_response(jsonify(json.loads(dumps(data))), status_code)
+
 @app.route("/fetch", methods=["GET"])
 def fetch():
     sql = "select * from cdr"
