@@ -3,21 +3,19 @@ from flask import Flask, jsonify, request, abort, make_response, render_template
 from flask_cors import CORS, cross_origin
 import traceback
 import json
-import mysql.connector  
+from flask_mysqldb import MySQL
 
 app = Flask(__name__)
 CORS(app)
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
-connector = mysql.connector
-mydb = connector.connect(
-        connection_timeout = 5,
-        port = "3306",
-        host = "localhost",
-        user = "root",
-        database = "asteriskcdrdb",
-    )
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'asteriskcdrdb'
+
+mysql = MySQL(app)
 
 def send(data, status_code):
     return make_response(jsonify(data), status_code)
@@ -25,7 +23,7 @@ def send(data, status_code):
 @app.route("/fetch", methods=["GET"])
 def fetch():
     sql = "select * from cdr"
-    mycursor = mydb.cursor()
+    mycursor = mysql.connection.cursor()
     mycursor.execute(sql)
     row = mycursor.fetchone()
     response = {} 
